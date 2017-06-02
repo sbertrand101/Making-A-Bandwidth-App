@@ -4,58 +4,66 @@
 1. Make directory: mkdir name
 2. Change into that directory: cd name
 3. Use npm to create a .json file: npm init and follow the instructions 
-	a. Name: name of project 
-	b. Version: version 
-Description: description of the app 
-Main (fills out as index.js) 
-scripts : echo ‘no test yet’ 
-Keywords: helps npm find your package when people search for the keywords 
-Author: your name 
-License: MIT 
-Open the text editor: stt
-Create index page: index.js
-In package.json add start to script: "start": "node index.js"
-Add the dependencies to index.js: 
+	* Name: name of project 
+	* Version: version 
+	* Description: description of the app 
+	* Main (fills out as index.js) 
+	* scripts : echo ‘no test yet’ 
+	* Keywords: helps npm find your package when people search for the keywords 
+	* Author: your name 
+	* License: MIT 
+4. Open the text editor: stt
+5. Create index page: index.js
+6. In package.json add start to script: "start": "node index.js"
+7. Add the dependencies to index.js: 
+```js
 var Bandwidth = require("node-bandwidth");
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var http = require("http").Server(app);
- 
-Install the dependencies: 
+```
+8. Install the dependencies: 
+```js
 npm install --save node-bandwidth
 npm install --save express
 npm install --save body-parser
+```
+
+9. Run index, download dependencies: npm start 
+10. Open back to home directory: cd
+11. Open ngrok: ./ngrok http 3000
+12. Create a new tab in terminal
+13. Return to project folder: cd -
+14. Open index.js file: stt (if not already open) 
+15. Create new client using Bandwidth interface 
+	* Add user ID 
+	* API Token 
+	* API Secret 
  
-Run index, download dependencies: npm start 
-Open back to home directory: cd
-Open ngrok: ./ngrok http 3000
-Create a new tab in terminal
-Return to project folder: cd -
-Open index.js file: stt (if not already open) 
-Create new client using Bandwidth interface 
-Add user ID 
-API Token 
-API Secret 
- 
+```js
 var client = new Bandwidth({
     // uses my environment variables. Go to dev.bandwidth.com, look under Account -> API Information -> Credentials OR .zsrh file
     userId    : process.env.BANDWIDTH_USER_ID, // <-- note, this is not the same as the username you used to login to the portal
     apiToken  : process.env.BANDWIDTH_API_TOKEN,
     apiSecret : process.env.BANDWIDTH_API_SECRET
 });
- 
-Add necessary apps: 
+```
+
+16. Add necessary apps: 
+```js
 app.use(bodyParser.json());
 //use a json body parser
 app.set('port', (process.env.PORT || 3000));
 //set port to an environment variable port or 3000
+```
+
+## Send a Message 
+*Your Bandwidth number sends a text/media message to your phone.*
  
-##Send a Message 
-Your Bandwidth number sends a text/media message to your phone.
- 
-Create methods 
-Method 1: sendMessage sends a message
+1. Create methods 
+	1. Method 1: sendMessage sends a message
+```js
 var sendMessage = function(params){
     client.Message.send({
         //returns a promise 
@@ -79,35 +87,43 @@ var sendMessage = function(params){
         console.log(err)
     });
 }
- 
-Method 2: messagePrinter prints message to console (helper method) 
+```
+	2. Method 2: messagePrinter prints message to console (helper method) 
+```js
 var messagePrinter= function (message){
     console.log('Using the message printer');
     console.log(message);
 }
+```
  
- 
-Create a number variable with the to and from numbers 
+2. Create a number variable with the to and from numbers 
+```js
 var numbers = {
     to: "+1#######",	        //number to send to
     from: "+1##########" //Bandwidth number
 };
- 
-Send message using the numbers 
+```
+
+3. Send message using the numbers 
+```js
 sendMessage(numbers);
+```
  
 ## Message Call Back
-When you run the app and message the bandwidth number, it sends a text/media message to your phone.
+* When you run the app and message the bandwidth number, it sends a text/media message to your phone. *
  
-Add all methods from Send a Message. 
-Set up website 
+1. Add all methods from Send a Message. 
+2. Set up website 
+```js
     app.get("/", function (req, res) {
     console.log(req); 
     res.send("Text on Website");
     //res.send(can be a website); ***Reroutes to other website?
 });
- 
-Create callback method 
+``` 
+
+3. Create callback method 
+```js
 app.post("/message-callback", function(req, res){
 // the /message-callback is the extension used for the website (req, res) means the user sends in a request and they get back a response 
 //for more about body refer to other info 
@@ -123,29 +139,32 @@ app.post("/message-callback", function(req, res){
     }
  
 });
- 
-Make the website listen 
+```
+
+4. Make the website listen 
+```js
 http.listen(app.get('port'), function(){
     //once done loading then do this (callback)
     console.log('listening on *:' + app.get('port'));
 });
- 
-Login to dev.bandwidth.com
-Choose the My Apps tab 
-Select create new 
-Choose post 
-Choose message 
- In the message callback box, enter the web address /message-callback (ex. http://2ab58988.ngrok.io/message-callback)
-Save 
-Add number by checking the box next to the number you want to use. 
-Run using npm start. Test by texting the ‘from’ number, and you should get your automated response message back.
+
+```
+
+5. Login to dev.bandwidth.com
+6. Choose the My Apps tab 
+7. Select create new 
+8. Choose post 
+9. Choose message 
+10. In the message callback box, enter the web address /message-callback (ex. http://2ab58988.ngrok.io/message-callback)
+11. Save 
+12. Add number by checking the box next to the number you want to use. 
+13. Run using npm start. Test by texting the ‘from’ number, and you should get your automated response message back.
  
 ## Create Outbound Call 
-### Bandwidth number calls your number
-1. Follow the setup instructions 
-2. Create a call method
-
-```js 
+Bandwidth number calls your number
+Follow the setup instructions 
+Create a call method
+ 
 var createCall = function(toNumber, fromNumber){
 	console.log("to: " + toNumber);
 	console.log("from: " + fromNumber);
@@ -182,9 +201,9 @@ var getBaseUrl = function (req) {
 ``` 
  
 ## Add Callback Listener to Outbound Call
-*Each time the call status changes (answered, hungup, declined, etc.) the program will be notified. *
-1. Follow the instructions to create a call. 
-2. In the create call method, add callbackUrl as a parameter 
+Each time the call status changes (answered, hungup, declined, etc.) the program will be notified. 
+Follow the instructions to create a call. 
+In the create call method, add callbackUrl as a parameter 
 
 ```js
 var createCallWithCallback = function(toNumber, fromNumber, callbackUrl){
@@ -196,7 +215,7 @@ var createCallWithCallback = function(toNumber, fromNumber, callbackUrl){
 		**callbackUrl: callbackUrl**
 	})
 };
- ```
+```
  
 3. Create outbound callback entry point. This is the url that will recieve the information about the call 
  
@@ -223,8 +242,11 @@ app.post("/calls", function (req, res){
 var getBaseUrl = function (req) {
 	return 'http://' + req.hostname;
 };
+
 ``` 
+
 ##Example: Speak Audio from Outbound Call 
+
 Create an outgoing call with a callback listener
 Check if the call is answered (this holds the program from speaking if the call is not answered or is still ringing) 
 Helper Method: 
@@ -269,7 +291,7 @@ app.post("/outbound-callbacks", function (req, res){
 });
  
  
-##Call Call-Back
+## Call Call-Back
 The user can call the Bandwidth number and the program will answer. It then speaks a sentence and hangs up when done. 
  
 Prepare by following the Setup instructions.
