@@ -110,7 +110,7 @@ sendMessage(numbers);
 ```
  
 ## Message Call Back
-_ When you run the app and message the bandwidth number, it sends a text/media message to your phone. _
+_When you run the app and message the bandwidth number, it sends a text/media message to your phone._
  
 1. Add all methods from Send a Message. 
 2. Set up website 
@@ -202,7 +202,7 @@ var getBaseUrl = function (req) {
 ``` 
  
 ## Add Callback Listener to Outbound Call
-_Each time the call status changes (answered, hungup, declined, etc.) the program will be notified. _
+_Each time the call status changes (answered, hungup, declined, etc.) the program will be notified._
 1. Follow the instructions to create a call.
 2. In the create call method, add callbackUrl as a parameter 
 
@@ -250,6 +250,7 @@ var getBaseUrl = function (req) {
 
 1. Create an outgoing call with a callback listener
 2. Check if the call is answered (this holds the program from speaking if the call is not answered or is still ringing) 
+
 **Helper Method:**
 
 ```js
@@ -259,6 +260,7 @@ var checkIfAnswer = function(eventType){
  ```
 
 3. Speak the sentence 
+
 **Helper Method:**
 
 ```js
@@ -268,6 +270,7 @@ var speakSentenceInCall = function (callId, sentence){
 ```
 
 4. Once the sentence is spoken, hang up the call. 
+
 **Helper Method:**
 
 ```js
@@ -301,7 +304,7 @@ app.post("/outbound-callbacks", function (req, res){
 ``` 
  
 ## Call Call-Back
-_The user can call the Bandwidth number and the program will answer. It then speaks a sentence and hangs up when done. _
+_The user can call the Bandwidth number and the program will answer. It then speaks a sentence and hangs up when done._
  
 1. Prepare by following the **Setup** instructions.
 2. Set up website. refer to **Message Call Back** Step 2.
@@ -370,9 +373,9 @@ Under My Applications on dev.bandwidth.com, choose the BOTH option to link the t
   skipMMSCarrierValidation: true }
 ```
  
-Any of these fields can be referenced by `body.’field’` (ex. body.direction or body.from) 
+_Any of these fields can be referenced by `body.’field’` (ex. body.direction or body.from)_
  
-*If the program just wants the to and from numbers to be hard coded in (no flexibility), the programmer can also create a message like this: 
+* If the program just wants the to and from numbers to be hard coded in (no flexibility), the programmer can also create a message like this: 
 
 ```js
 client.Message.send({ 
@@ -383,7 +386,7 @@ client.Message.send({
     })
 ```
 
-They can also create a call like this: 
+_They can also create a call like this:_ 
 
 ```js
 client.Call.create({
