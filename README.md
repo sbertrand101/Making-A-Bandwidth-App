@@ -1,9 +1,9 @@
 # Making-A-Bandwidth-App
 
 ## Setup to create an app 
-1. Make directory: mkdir name
-2. Change into that directory: cd name
-3. Use npm to create a .json file: npm init and follow the instructions 
+1. Make directory: `mkdir name`
+2. Change into that directory: `cd name`
+3. Use npm to create a .json file: `npm init` and follow the instructions 
 	* Name: name of project 
 	* Version: version 
 	* Description: description of the app 
@@ -12,9 +12,9 @@
 	* Keywords: helps npm find your package when people search for the keywords 
 	* Author: your name 
 	* License: MIT 
-4. Open the text editor: stt
+4. Open the text editor: `stt`
 5. Create index page: index.js
-6. In package.json add start to script: "start": "node index.js"
+6. In package.json add start to script: `"start": "node index.js"`
 7. Add the dependencies to index.js: 
 ```js
 var Bandwidth = require("node-bandwidth");
@@ -30,12 +30,12 @@ npm install --save express
 npm install --save body-parser
 ```
 
-9. Run index, download dependencies: npm start 
-10. Open back to home directory: cd
-11. Open ngrok: ./ngrok http 3000
+9. Run index, download dependencies: `npm start` 
+10. Open back to home directory: `cd`
+11. Open ngrok: `./ngrok http 3000`
 12. Create a new tab in terminal
-13. Return to project folder: cd -
-14. Open index.js file: stt (if not already open) 
+13. Return to project folder: `cd -`
+14. Open index.js file: `stt` (if not already open) 
 15. Create new client using Bandwidth interface 
 	* Add user ID 
 	* API Token 
@@ -89,6 +89,7 @@ var sendMessage = function(params){
 }
 ```
 	2. Method 2: messagePrinter prints message to console (helper method) 
+
 ```js
 var messagePrinter= function (message){
     console.log('Using the message printer');
@@ -158,7 +159,7 @@ http.listen(app.get('port'), function(){
 10. In the message callback box, enter the web address /message-callback (ex. http://2ab58988.ngrok.io/message-callback)
 11. Save 
 12. Add number by checking the box next to the number you want to use. 
-13. Run using npm start. Test by texting the ‘from’ number, and you should get your automated response message back.
+13. Run using `npm start`. Test by texting the ‘from’ number, and you should get your automated response message back.
  
 ## Create Outbound Call 
 _Bandwidth number calls your number_
