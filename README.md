@@ -58,7 +58,7 @@ app.set('port', (process.env.PORT || 3000));
 //set port to an environment variable port or 3000
 ```
 
-##Send a Message 
+## Send a Message 
 *Your Bandwidth number sends a text/media message to your phone.*
  
 1. Create methods 
@@ -109,7 +109,7 @@ var numbers = {
 sendMessage(numbers);
 ```
  
-##Message Call Back
+## Message Call Back
 * When you run the app and message the bandwidth number, it sends a text/media message to your phone. *
  
 1. Add all methods from Send a Message. 
@@ -159,7 +159,7 @@ http.listen(app.get('port'), function(){
 12. Add number by checking the box next to the number you want to use. 
 13. Run using npm start. Test by texting the ‘from’ number, and you should get your automated response message back.
  
-##Create Outbound Call 
+## Create Outbound Call 
 Bandwidth number calls your number
 Follow the setup instructions 
 Create a call method
@@ -196,7 +196,7 @@ var getBaseUrl = function (req) {
 };
  
  
-##Add Callback Listener to Outbound Call
+## Add Callback Listener to Outbound Call
 Each time the call status changes (answered, hungup, declined, etc.) the program will be notified. 
 Follow the instructions to create a call. 
 In the create call method, add callbackUrl as a parameter 
@@ -235,7 +235,7 @@ var getBaseUrl = function (req) {
 	return 'http://' + req.hostname;
 };
  
-##Example: Speak Audio from Outbound Call 
+## Example: Speak Audio from Outbound Call 
 Create an outgoing call with a callback listener
 Check if the call is answered (this holds the program from speaking if the call is not answered or is still ringing) 
 Helper Method: 
@@ -280,7 +280,7 @@ app.post("/outbound-callbacks", function (req, res){
 });
  
  
-##Call Call-Back
+## Call Call-Back
 The user can call the Bandwidth number and the program will answer. It then speaks a sentence and hangs up when done. 
  
 Prepare by following the Setup instructions.
@@ -327,10 +327,10 @@ Save
 Add number by checking the box next to the number you want to use. 
 Run using npm start. Test by calling the bandwidth number chosen in step 12. If it works, it should speak a sentence and hang up.
  
-##Combining Voice and Messaging Callbacks
+## Combining Voice and Messaging Callbacks
 Under My Applications on dev.bandwidth.com, choose the BOTH option to link the two types of callbacks to one Bandwidth number. Also only one website and one listener must be created to run the application. 
  
-##Other info 
+## Other info 
 Messages are sent back using JSON. It comes back in a header and body format. The header contains authentication while the body has all the content. Bandwidth bodies come back as: 
  
 { direction: 'out',
