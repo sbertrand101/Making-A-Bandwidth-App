@@ -96,7 +96,7 @@ var numbers = {
 Send message using the numbers 
 sendMessage(numbers);
  
-##Message Call Back
+## Message Call Back
 When you run the app and message the bandwidth number, it sends a text/media message to your phone.
  
 Add all methods from Send a Message. 
@@ -140,11 +140,12 @@ Save
 Add number by checking the box next to the number you want to use. 
 Run using npm start. Test by texting the ‘from’ number, and you should get your automated response message back.
  
-##Create Outbound Call 
-Bandwidth number calls your number
-Follow the setup instructions 
-Create a call method
- 
+## Create Outbound Call 
+### Bandwidth number calls your number
+1. Follow the setup instructions 
+2. Create a call method
+
+```js 
 var createCall = function(toNumber, fromNumber){
 	console.log("to: " + toNumber);
 	console.log("from: " + fromNumber);
@@ -153,8 +154,11 @@ var createCall = function(toNumber, fromNumber){
 		to  : toNumber
 		})
 };
- 
-Create call entry point 
+```
+
+3. Create call entry point 
+
+```js
 app.post("/calls", function (req, res){
 	var callbackUrl = getBaseUrl(req);
 	var body = req.body;
@@ -175,33 +179,37 @@ app.post("/calls", function (req, res){
 var getBaseUrl = function (req) {
 	return 'http://' + req.hostname;
 };
+``` 
  
- 
-##Add Callback Listener to Outbound Call
-Each time the call status changes (answered, hungup, declined, etc.) the program will be notified. 
-Follow the instructions to create a call. 
-In the create call method, add callbackUrl as a parameter 
+## Add Callback Listener to Outbound Call
+*Each time the call status changes (answered, hungup, declined, etc.) the program will be notified. *
+1. Follow the instructions to create a call. 
+2. In the create call method, add callbackUrl as a parameter 
+
+```js
 var createCallWithCallback = function(toNumber, fromNumber, callbackUrl){
 	console.log("to: " + toNumber);
 	console.log("from: " + fromNumber);
 	return client.Call.create({
 		from: fromNumber,
 		to  : toNumber,
-		callbackUrl: callbackUrl
+		**callbackUrl: callbackUrl**
 	})
 };
+ ```
  
+3. Create outbound callback entry point. This is the url that will recieve the information about the call 
  
-Create outbound callback entry point. This is the url that will recieve the information about the call 
- 
-Add the callback url to the call entry point 
+4. Add the callback url to the call entry point 
+
+```js
 app.post("/calls", function (req, res){
-	var callbackUrl = getBaseUrl(req) + "/outbound-callbacks";
+	var callbackUrl = getBaseUrl(req) **+ "/outbound-callbacks"**;
 	var body = req.body;
 	console.log(body);
 	var phoneNumber = body.phoneNumber;
 	console.log(phoneNumber);
-	createCallWithCallback(phoneNumber, myBWNumber, callbackUrl)
+	createCall**WithCallback**(phoneNumber, myBWNumber**, callbackUrl**)
 	.then(function(call){
 		console.log(call);
 		res.send(call).status(201);
@@ -215,7 +223,7 @@ app.post("/calls", function (req, res){
 var getBaseUrl = function (req) {
 	return 'http://' + req.hostname;
 };
- 
+``` 
 ##Example: Speak Audio from Outbound Call 
 Create an outgoing call with a callback listener
 Check if the call is answered (this holds the program from speaking if the call is not answered or is still ringing) 
@@ -308,10 +316,10 @@ Save
 Add number by checking the box next to the number you want to use. 
 Run using npm start. Test by calling the bandwidth number chosen in step 12. If it works, it should speak a sentence and hang up.
  
-##Combining Voice and Messaging Callbacks
+## Combining Voice and Messaging Callbacks
 Under My Applications on dev.bandwidth.com, choose the BOTH option to link the two types of callbacks to one Bandwidth number. Also only one website and one listener must be created to run the application. 
  
-##Other info 
+## Other info 
 Messages are sent back using JSON. It comes back in a header and body format. The header contains authentication while the body has all the content. Bandwidth bodies come back as: 
  
 { direction: 'out',
