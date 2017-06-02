@@ -16,6 +16,7 @@
 5. Create index page: index.js
 6. In package.json add start to script: `"start": "node index.js"`
 7. Add the dependencies to index.js: 
+
 ```js
 var Bandwidth = require("node-bandwidth");
 var express = require("express");
@@ -23,6 +24,7 @@ var app = express();
 var bodyParser = require("body-parser");
 var http = require("http").Server(app);
 ```
+
 8. Install the dependencies: 
 ```js
 npm install --save node-bandwidth
@@ -62,7 +64,8 @@ app.set('port', (process.env.PORT || 3000));
 _Your Bandwidth number sends a text/media message to your phone._
  
 1. Create methods 
-	1. Method 1: sendMessage sends a message
+	_Method 1: sendMessage sends a message_
+
 ```js
 var sendMessage = function(params){
     client.Message.send({
@@ -88,7 +91,8 @@ var sendMessage = function(params){
     });
 }
 ```
-	2. Method 2: messagePrinter prints message to console (helper method) 
+
+	_Method 2: messagePrinter prints message to console (helper method)_ 
 
 ```js
 var messagePrinter= function (message){
