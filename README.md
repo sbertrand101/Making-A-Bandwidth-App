@@ -59,7 +59,7 @@ app.set('port', (process.env.PORT || 3000));
 ```
 
 ## Send a Message 
-*Your Bandwidth number sends a text/media message to your phone.*
+_Your Bandwidth number sends a text/media message to your phone._
  
 1. Create methods 
 	1. Method 1: sendMessage sends a message
@@ -110,7 +110,7 @@ sendMessage(numbers);
 ```
  
 ## Message Call Back
-* When you run the app and message the bandwidth number, it sends a text/media message to your phone. *
+_ When you run the app and message the bandwidth number, it sends a text/media message to your phone. _
  
 1. Add all methods from Send a Message. 
 2. Set up website 
@@ -161,10 +161,11 @@ http.listen(app.get('port'), function(){
 13. Run using npm start. Test by texting the ‘from’ number, and you should get your automated response message back.
  
 ## Create Outbound Call 
-Bandwidth number calls your number
-Follow the setup instructions 
-Create a call method
+_Bandwidth number calls your number_
+1. Follow the setup instructions 
+2. Create a call method
  
+```js
 var createCall = function(toNumber, fromNumber){
 	console.log("to: " + toNumber);
 	console.log("from: " + fromNumber);
@@ -201,12 +202,12 @@ var getBaseUrl = function (req) {
 ``` 
  
 ## Add Callback Listener to Outbound Call
-Each time the call status changes (answered, hungup, declined, etc.) the program will be notified. 
-Follow the instructions to create a call. 
-In the create call method, add callbackUrl as a parameter 
+_Each time the call status changes (answered, hungup, declined, etc.) the program will be notified. _
+1. Follow the instructions to create a call.
+2. In the create call method, add callbackUrl as a parameter 
 
 ```js
-var createCallWithCallback = function(toNumber, fromNumber, callbackUrl){
+var createCall**WithCallback** = function(toNumber, fromNumber**, callbackUrl**){
 	console.log("to: " + toNumber);
 	console.log("from: " + fromNumber);
 	return client.Call.create({
@@ -245,23 +246,31 @@ var getBaseUrl = function (req) {
 
 ``` 
 
-##Example: Speak Audio from Outbound Call 
+## Example: Speak Audio from Outbound Call 
 
-Create an outgoing call with a callback listener
-Check if the call is answered (this holds the program from speaking if the call is not answered or is still ringing) 
-Helper Method: 
+1. Create an outgoing call with a callback listener
+2. Check if the call is answered (this holds the program from speaking if the call is not answered or is still ringing) 
+**Helper Method:**
+
+```js
 var checkIfAnswer = function(eventType){
 	return (eventType === "answer");
 }
- 
-Speak the sentence 
-Helper Method:
+ ```
+
+3. Speak the sentence 
+**Helper Method:**
+
+```js
 var speakSentenceInCall = function (callId, sentence){
 	return client.Call.speakSentence(callId, sentence);
 }
- 
-Once the sentence is spoken, hang up the call. 
-Helper Method:
+```
+
+4. Once the sentence is spoken, hang up the call. 
+**Helper Method:**
+
+```js
 var isSpeakingDone = function (callBackEvent){
 	return (callBackEvent.eventType === "speak" && callBackEvent.state === "PLAYBACK_STOP");
 }
@@ -289,15 +298,17 @@ app.post("/outbound-callbacks", function (req, res){
 		});
 	}
 });
- 
+``` 
  
 ## Call Call-Back
-The user can call the Bandwidth number and the program will answer. It then speaks a sentence and hangs up when done. 
+_The user can call the Bandwidth number and the program will answer. It then speaks a sentence and hangs up when done. _
  
-Prepare by following the Setup instructions.
-Set up website. refer to Message Call Back Step 2.
-Create listener. refer to Message Call Back Step 4.
-Create callback method:
+1. Prepare by following the **Setup** instructions.
+2. Set up website. refer to **Message Call Back** Step 2.
+3. Create listener. refer to **Message Call Back** Step 4.
+4. Create callback method:
+
+```js
 app.post("/call-callback", function (req, res){
 	var body = req.body;
 	res.sendStatus(200);
@@ -327,23 +338,26 @@ app.post("/call-callback", function (req, res){
 	}
 	//Default: print out body
 });
-Login to dev.bandwidth.com
-Choose the My Apps tab 
-Select create new 
-Choose post 
-Choose voice 
- In the voice callback box, enter the web address /call-callback (ex. http://2ab58988.ngrok.io/call-callback) 
-Check the “Automatically answer incoming calls” box 
-Save 
-Add number by checking the box next to the number you want to use. 
-Run using npm start. Test by calling the bandwidth number chosen in step 12. If it works, it should speak a sentence and hang up.
+```
+
+5. Login to dev.bandwidth.com
+6. Choose the My Apps tab 
+7. Select create new 
+8. Choose post 
+9. Choose voice 
+10. In the voice callback box, enter the web address /call-callback (ex. http://2ab58988.ngrok.io/call-callback) 
+11. Check the “Automatically answer incoming calls” box 
+12. Save 
+13. Add number by checking the box next to the number you want to use. 
+14. Run using npm start. Test by calling the bandwidth number chosen in step 12. If it works, it should speak a sentence and hang up.
  
 ## Combining Voice and Messaging Callbacks
 Under My Applications on dev.bandwidth.com, choose the BOTH option to link the two types of callbacks to one Bandwidth number. Also only one website and one listener must be created to run the application. 
  
 ## Other info 
-Messages are sent back using JSON. It comes back in a header and body format. The header contains authentication while the body has all the content. Bandwidth bodies come back as: 
+* Messages are sent back using JSON. It comes back in a header and body format. The header contains authentication while the body has all the content. Bandwidth bodies come back as: 
  
+```js 
 { direction: 'out',
   from: '+17204407441',
   id: 'm-ouyf7kktx3wggehh6iggp6y',
@@ -354,22 +368,30 @@ Messages are sent back using JSON. It comes back in a header and body format. Th
   time: '2017-05-23T20:48:02Z',
   to: '+13035659555',
   skipMMSCarrierValidation: true }
+```
  
-Any of these fields can be referenced by body.’field’ (ex. body.direction or body.from) 
+Any of these fields can be referenced by `body.’field’` (ex. body.direction or body.from) 
  
-If the program just wants the to and from numbers to be hard coded in (no flexibility), the programmer can also create a message like this: 
+*If the program just wants the to and from numbers to be hard coded in (no flexibility), the programmer can also create a message like this: 
+
+```js
 client.Message.send({ 
         from: "+17204407441",
         to: "+13035659555",,
         text : "Text here",
         //media: "https://imageurl.jpg"
     })
+```
+
 They can also create a call like this: 
+
+```js
 client.Call.create({
     from: "+17204407441",
     to: "+13035659555",
     callbackUrl: "http://2ab58988.ngrok.io"
 })
+```
  
  
  
