@@ -92,7 +92,7 @@ var sendMessage = function(params){
 }
 ```
 
-	_Method 2: messagePrinter prints message to console (helper method)_ 
+_Method 2: messagePrinter prints message to console (helper method)_ 
 
 ```js
 var messagePrinter= function (message){
