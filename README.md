@@ -64,7 +64,8 @@ app.set('port', (process.env.PORT || 3000));
 _Your Bandwidth number sends a text/media message to your phone._
  
 1. Create methods 
-	_Method 1: sendMessage sends a message_
+
+_Method 1: **sendMessage** sends a message_
 
 ```js
 var sendMessage = function(params){
@@ -92,7 +93,7 @@ var sendMessage = function(params){
 }
 ```
 
-_Method 2: messagePrinter prints message to console (helper method)_ 
+_Method 2: **messagePrinter** prints message to console (helper method)_ 
 
 ```js
 var messagePrinter= function (message){
