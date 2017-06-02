@@ -252,7 +252,7 @@ var getBaseUrl = function (req) {
 
 ``` 
 
-## Example: Speak Audio from Outbound Call 
+### Example: Speak Audio from Outbound Call 
 
 1. Create an outgoing call with a callback listener
 2. Check if the call is answered (this holds the program from speaking if the call is not answered or is still ringing) 
