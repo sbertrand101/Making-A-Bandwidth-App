@@ -28,7 +28,7 @@
 		* export BANDWIDTH_API_TOKEN=
 		* export BANDWIDTH_API_SECRET=
  
-## Testing Your Application
+## Running Your Application
 To test the application, launch Ngrok and Postgres. To launch ngrok, type `./ngrok http 3000` in the terminal on a new tab. To view the webpage, copy the first forwarding link on the ngrok terminal page. Paste this link in a web browser. If everything is connected, when the program is launched, the website will be live and show no errors. Note: If given the error **Failed to complete tunnel connection**, this means that the program is not live or is not setup correctly. 
 
 
