@@ -7,15 +7,15 @@
 	3. Fill out the requested information. The platform will call the number provided and will say a confirmation number. **NOTE:** This is a phone call not a text. 
 	4. Login 
 2. Install an editor. There are many to chose from but the following applications were made using **sublime** 
-https://www.sublimetext.com/
+* https://www.sublimetext.com/
 3. Install **ngrok**. This will allow the program to be live on the internet: 
-https://ngrok.com/
+* https://ngrok.com/
 4. Install a program to create a local database if needed. These applications use **Postgres.app** 
-http://postgresapp.com/documentation/install.html
+* http://postgresapp.com/documentation/install.html
 5. Configure the **zsh file**. **Oh my zsh** is a great link for managing the zsh file. 
-https://github.com/robbyrussell/oh-my-zsh
+* https://github.com/robbyrussell/oh-my-zsh
 6. Install **nvm**. For a comprehensive setup, follow this link: 
-https://github.com/lukechilds/zsh-nvm
+* https://github.com/lukechilds/zsh-nvm
 7. Setup environment variables in zshrc file. To find the **ID**, **Token**, and **Secret**: 
 	1. Login to http://dev.bandwidth.com/ 
 	2. Select the **Account** tag and scroll down until **API Information** appears. The user ID is displayed in the **User ID** box. 
