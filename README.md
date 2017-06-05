@@ -1,4 +1,4 @@
-# Making-A-Bandwidth-App
+# _Making A Bandwidth App_
 
 ## Setup to create an app 
 1. Make directory: `mkdir name`
@@ -60,6 +60,7 @@ app.set('port', (process.env.PORT || 3000));
 //set port to an environment variable port or 3000
 ```
 
+# Messaging
 ## Send a Message 
 _Your Bandwidth number sends a text/media message to your phone._
  
@@ -166,6 +167,7 @@ http.listen(app.get('port'), function(){
 12. Add number by checking the box next to the number you want to use. 
 13. Run using `npm start`. Test by texting the ‘from’ number, and you should get your automated response message back.
  
+# Calling
 ## Create Outbound Call 
 _Bandwidth number calls your number_
 1. Follow the setup instructions 
@@ -252,7 +254,7 @@ var getBaseUrl = function (req) {
 
 ``` 
 
-### Example: Speak Audio from Outbound Call 
+## Example: Speak Audio from Outbound Call 
 
 1. Create an outgoing call with a callback listener
 2. Check if the call is answered (this holds the program from speaking if the call is not answered or is still ringing) 
@@ -363,7 +365,7 @@ app.post("/call-callback", function (req, res){
 ## Combining Voice and Messaging Callbacks
 Under My Applications on dev.bandwidth.com, choose the BOTH option to link the two types of callbacks to one Bandwidth number. Also only one website and one listener must be created to run the application. 
  
-## Other info 
+# Other info 
 * Messages are sent back using JSON. It comes back in a header and body format. The header contains authentication while the body has all the content. Bandwidth bodies come back as: 
  
 ```js 
