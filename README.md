@@ -1,4 +1,4 @@
-# _Making A Bandwidth App_
+# _Making A Bandwidth App (node)_
 
 ## Setup to create an app 
 1. Make directory: `mkdir name`
@@ -215,13 +215,13 @@ _Each time the call status changes (answered, hungup, declined, etc.) the progra
 2. In the create call method, add callbackUrl as a parameter 
 
 ```js
-var createCall**WithCallback** = function(toNumber, fromNumber**, callbackUrl**){
+var createCallWithCallback = function(toNumber, fromNumber, callbackUrl){
 	console.log("to: " + toNumber);
 	console.log("from: " + fromNumber);
 	return client.Call.create({
 		from: fromNumber,
 		to  : toNumber,
-		**callbackUrl: callbackUrl**
+		callbackUrl: callbackUrl
 	})
 };
 ```
@@ -232,12 +232,12 @@ var createCall**WithCallback** = function(toNumber, fromNumber**, callbackUrl**)
 
 ```js
 app.post("/calls", function (req, res){
-	var callbackUrl = getBaseUrl(req) **+ "/outbound-callbacks"**;
+	var callbackUrl = getBaseUrl(req) + "/outbound-callbacks";
 	var body = req.body;
 	console.log(body);
 	var phoneNumber = body.phoneNumber;
 	console.log(phoneNumber);
-	createCall**WithCallback**(phoneNumber, myBWNumber**, callbackUrl**)
+	createCallWithCallback(phoneNumber, myBWNumber, callbackUrl)
 	.then(function(call){
 		console.log(call);
 		res.send(call).status(201);
