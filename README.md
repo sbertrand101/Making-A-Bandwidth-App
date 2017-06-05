@@ -44,7 +44,7 @@ To test the application, launch Ngrok and Postgres. To launch ngrok, type `./ngr
 	* Keywords: helps npm find your package when people search for the keywords 
 	* Author: your name 
 	* License: MIT 
-4. Open the text editor: `stt`
+4. Open the directory in your favorite text editor
 5. Create index page: index.js
 6. In package.json add start to script: `"start": "node index.js"`
 7. Add the dependencies to index.js: 
@@ -69,7 +69,7 @@ npm install --save body-parser
 11. Open ngrok: `./ngrok http 3000`
 12. Create a new tab in terminal
 13. Return to project folder: `cd -`
-14. Open index.js file: `stt` (if not already open) 
+14. Open index.js file 
 15. Create new client using Bandwidth interface 
 	* Add user ID 
 	* API Token 
